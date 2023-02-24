@@ -1,9 +1,6 @@
 
 #!/usr/bin/python3
-"""
-    python script that extract data from an API and do
-    some action with it
-"""
+# getting data from API using python
 import requests
 import sys
 
@@ -27,7 +24,6 @@ if __name__ == "__main__":
     todo_request = requests.get(user_todo_url)
 
     data2 = todo_request.json()
-    
     for i in data2:
         if i["userId"] == Id:
             task += 1
@@ -35,8 +31,8 @@ if __name__ == "__main__":
             if i['completed']:
                 new.append(i['title'])
 
-    statement = "Employee {} is done with tasks ({}/{}):".format(data["name"],
-                                                                 len(new), task)
+    statement = "Employee {} is done with tasks ({}/{}):".format(data["name"]
+                                                                 ,len(new), task)
     print(statement)
     for j in new:
         print('\t {}'.format(j))
