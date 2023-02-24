@@ -1,39 +1,36 @@
-
 #!/usr/bin/python3
-"""getting data from API using python"""
+"""Script to get todos for a user from API"""
+
 import requests
 import sys
 
 
-if __name__ == "__main__":
-    """code to get information from the specified API"""
+def main():
+    """main function"""
+    user_id = int(sys.argv[1])
+    todo_url = 'https://jsonplaceholder.typicode.com/todos'
+    user_url = 'https://jsonplaceholder.typicode.com/users/{}'.format(user_id)
 
-    Id = int(sys.argv[1])
+    response = requests.get(todo_url)
 
-    user_url = "https://jsonplaceholder.typicode.com/users/{}".format(Id)
+    total_questions = 0
+    completed = []
+    for todo in response.json():
 
-    request_user = requests.get(user_url)
+        if todo['userId'] == user_id:
+            total_questions += 1
 
-    data = request_user.json()
-    name = data["name"]
+            if todo['completed']:
+                completed.append(todo['title'])
 
-    user_todo_url = "https://jsonplaceholder.typicode.com/todos/"
+    user_name = requests.get(user_url).json()['name']
 
-    task = 0
-    new = []
+    printer = ("Employee {} is done with tasks({}/{}):".format(user_name,
+               len(completed), total_questions))
+    print(printer)
+    for q in completed:
+        print("\t {}".format(q))
 
-    todo_request = requests.get(user_todo_url)
 
-    data2 = todo_request.json()
-    for i in data2:
-        if i["userId"] == Id:
-            task += 1
-
-            if i['completed']:
-                new.append(i['title'])
-
-    statement = "Employee {} is done with tasks ({}/{}):".format(name,
-                                                                len(new), task)
-    print(statement)
-    for j in new:
-        print('\t {}'.format(j))
+if __name__ == '__main__':
+    main()
