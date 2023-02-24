@@ -1,11 +1,11 @@
 
 #!/usr/bin/python3
 """
-    python script that extract data from an API and do 
-    some action with it    
+    python script that extract data from an API and do
+    some action with it
 """
-import sys
 import requests
+import sys
 
 
 if __name__ == "__main__":
@@ -30,13 +30,13 @@ if __name__ == "__main__":
     
     for i in data2:
         if i["userId"] == Id:
-            task+=1
+            task += 1
 
-            if i['completed'] == True:
+            if i['completed']:
                 new.append(i['title'])
 
     statement = "Employee {} is done with tasks ({}/{}):".format(data["name"],
-                                                                len(new),task)
+                                                                 len(new), task)
     print(statement)
     for j in new:
         print('\t {}'.format(j))
