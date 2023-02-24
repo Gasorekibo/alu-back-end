@@ -1,6 +1,6 @@
 
 #!/usr/bin/python3
-# getting data from API using python
+"""getting data from API using python"""
 import requests
 import sys
 
