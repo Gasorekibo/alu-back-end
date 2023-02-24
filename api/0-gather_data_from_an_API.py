@@ -1,5 +1,5 @@
 
-#/usr/bin/python3
+#!/usr/bin/python3
 """
     python script that extract data from an API and do 
     some action with it    
